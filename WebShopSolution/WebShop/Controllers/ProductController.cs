@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Repository.Model;
 using WebShop.UnitOfWork;
 
 namespace WebShop.Controllers
@@ -7,29 +8,34 @@ namespace WebShop.Controllers
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        public ProductController()
+        private readonly IUnitOfWork _unitOfWork;
+
+        // Constructor with UnitOfWork injected
+        public ProductController(IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
         }
 
-        // Endpoint för att hämta alla produkter
-        [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetProducts()
-        {
-            // Behöver använda repository via Unit of Work för att hämta produkter
-            return Ok();
-        }
-
-        // Endpoint för att lägga till en ny produkt
+        // POST: api/Product
         [HttpPost]
-        public ActionResult AddProduct(Product product)
+        public IActionResult AddProduct([FromBody] Product product)
         {
-            // Lägger till produkten via repository
+            if (product == null)
+                return BadRequest("Product is null.");
 
-            // Sparar förändringar
+            try
+            {
+                _unitOfWork.Products.Add(product);
 
-            // Notifierar observatörer om att en ny produkt har lagts till
+                // Save changes
+                _unitOfWork.Complete();
 
-            return Ok();
+                return Ok("Product added successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }
