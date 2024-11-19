@@ -6,7 +6,39 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    internal class Repository
+    public class Repository<T> : IRepository<T> where T : class
     {
+        //Consume db Context
+        //private readonly  Context context
+        //use DbSet
+        //private readonly DbSet dbset
+        public Repository()
+        {
+            /* Context context, DbSet dbSet */
+        }
+        public void Add(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(T item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
