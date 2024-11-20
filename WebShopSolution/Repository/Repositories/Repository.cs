@@ -12,13 +12,17 @@ namespace Repository.Repositories
         //private readonly  Context context
         //use DbSet
         //private readonly DbSet dbset
-        public Repository()
+        public Repository(/* Context context, DbSet dbSet */)
         {
-            /* Context context, DbSet dbSet */
+            /*_context = context;
+             _dbSet = context.Set<T>();
+            */
         }
         public void Add(T item)
         {
-            throw new NotImplementedException();
+           /*
+             _dbSet.Add(item);
+            */
         }
 
         public T Get(int id)
