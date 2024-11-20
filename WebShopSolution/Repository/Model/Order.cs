@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Repository.Model
 {
-    internal class Order
+    public class Order
     {
+        public int Id { get; set; } // Unikt ID för order
+        public Order OrderObject { get; set; } // Namn på order
     }
 }

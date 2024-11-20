@@ -1,6 +1,8 @@
-﻿namespace Repository.Repositories.Orders;
+﻿using Repository.Model;
 
-public interface IOrderRepository
+namespace Repository.Repositories.Orders;
+
+public interface IOrderRepository : IRepository<Order>
 {
-    
+    bool ChangeOrderStatus(Order order);
 }
