@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Repository.Data;
 using WebShop.Notifications;
 using WebShop.Repositories;
 using WebShop.UnitOfWork;
