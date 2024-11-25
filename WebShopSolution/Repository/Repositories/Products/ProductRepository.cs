@@ -6,18 +6,33 @@ namespace Repository.Repositories.Products
 {
     public class ProductRepository : Repository<Product>, IProductRepository
     {
-        public ProductRepository(MyDbContext context, DbSet<Product> dbSet) : base(context, dbSet) { }
-        public bool UpdateProductStock(Product product, int quantity)
-        {
-            throw new NotImplementedException();
+        private readonly MyDbContext _context;
+        public ProductRepository(MyDbContext context, DbSet<Product> dbSet) : base(context, dbSet) {
+            _context = context;
         }
 
-        public void AddProduct(Product product)
+        public Product GetById(int productId)
         {
-            if (product == null)
-                throw new ArgumentNullException(nameof(product));
+            return _context.Set<Product>().Find(productId);
+        }
 
-            Add(product);
+        public bool UpdateProductStock(int productId, int quantity)
+        {
+            var product = _context.Set<Product>().Find(productId);
+
+            if (product == null || product.Stock + quantity < 0)
+                return false;
+
+            product.Stock += quantity;
+            product.UpdatedAt = DateTime.UtcNow;
+
+            _context.SaveChanges();
+            return true;
+        }
+
+        public bool ProductExists(int productId)
+        {
+            return _context.Set<Product>().Any(p => p.Id == productId);
         }
 
     }
