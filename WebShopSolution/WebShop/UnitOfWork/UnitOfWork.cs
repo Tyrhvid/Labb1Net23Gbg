@@ -1,4 +1,5 @@
-﻿using WebShop.Notifications;
+﻿using WebShop.Models;
+using WebShop.Notifications;
 using WebShop.Repositories;
 
 namespace WebShop.UnitOfWork
