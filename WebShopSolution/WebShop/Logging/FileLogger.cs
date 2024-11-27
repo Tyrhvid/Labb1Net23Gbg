@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace WebShop.Logging
+﻿namespace WebShop.Logging
 {
     public class FileLogger : ILogger
     {

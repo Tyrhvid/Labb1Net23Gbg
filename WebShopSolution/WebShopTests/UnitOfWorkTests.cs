@@ -1,8 +1,6 @@
 using WebShop.Data;
 using WebShop.Models;
-using WebShop.Repositories;
 using WebShop.UnitOfWork;
-using Xunit;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebShop.Tests

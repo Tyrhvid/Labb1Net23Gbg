@@ -1,6 +1,4 @@
-﻿using System.IO;
-using WebShop.Logging;
-using Xunit;
+﻿using WebShop.Logging;
 
 namespace WebShop.Tests
 {

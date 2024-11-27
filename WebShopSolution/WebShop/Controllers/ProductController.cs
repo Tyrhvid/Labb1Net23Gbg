@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebShop.UnitOfWork;
 using WebShop.Models;
-using WebShop.Logging;
 
 namespace WebShop.Controllers
 {
