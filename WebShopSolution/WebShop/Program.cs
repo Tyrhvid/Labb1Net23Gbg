@@ -1,32 +1,35 @@
-using WebShop.Notifications;
+using Microsoft.EntityFrameworkCore;
+using WebShop.Data;
 using WebShop.Repositories;
 using WebShop.UnitOfWork;
+using WebShop.Logging;
+using WebShop.Notifications;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Registrera Unit of Work i DI-container
+
+// Add DbContext to the DI container
+builder.Services.AddDbContext<MyDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register Unit of Work in DI-container
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<INotificationObserver, EmailNotification>();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Register logger in DI-container
+builder.Services.AddSingleton<ILogger>(provider => new FileLogger("log.txt"));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
 app.UseSwagger();
 app.UseSwaggerUI();
-//}
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

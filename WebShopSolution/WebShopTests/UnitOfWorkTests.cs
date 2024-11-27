@@ -1,4 +1,5 @@
 using Moq;
+using WebShop.Models;
 using WebShop.Notifications;
 
 namespace WebShop.Tests
