@@ -19,7 +19,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<INotificationObserver, EmailNotification>();
 
 // Register logger in DI-container
-builder.Services.AddSingleton<ILogger>(provider => new FileLogger("log.txt"));
+builder.Services.AddSingleton<WebShop.Logging.ILogger>(provider => new FileLogger("log.txt"));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

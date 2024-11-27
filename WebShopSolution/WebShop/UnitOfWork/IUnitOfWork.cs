@@ -3,12 +3,10 @@ using WebShop.Repositories;
 
 namespace WebShop.UnitOfWork
 {
-    // Gränssnitt för Unit of Work
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-         // Repository för produkter
-         // Sparar förändringar (om du använder en databas)
-        void NotifyProductAdded(Product product); // Notifierar observatörer om ny produkt
+        IRepository<Product> Products { get; }
+        int Complete();
+        void NotifyProductAdded(Product product);  // Lägg till denna rad
     }
 }
-
