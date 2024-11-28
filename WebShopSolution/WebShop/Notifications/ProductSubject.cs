@@ -2,10 +2,10 @@
 
 namespace WebShop.Notifications
 {
-    // Subject som håller reda på observatörer och notifierar dem
+    // Subject som håller reda på observatörer och notifiera
     public class ProductSubject
     {
-        // Lista över registrerade observatörer
+        // Lista över registrerade observatöre
         private readonly List<INotificationObserver> _observers = new List<INotificationObserver>();
 
         public void Attach(INotificationObserver observer)
@@ -22,7 +22,7 @@ namespace WebShop.Notifications
 
         public void Notify(Product product)
         {
-            // Notifiera alla observatörer om en ny produkt
+            // Notifiera aöla observatörer om en ny produkt
             foreach (var observer in _observers)
             {
                 observer.Update(product);
