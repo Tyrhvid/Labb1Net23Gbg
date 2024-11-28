@@ -11,10 +11,8 @@
 
         public void Log(string message)
         {
-            using (var writer = new StreamWriter(_filePath, true))
-            {
-                writer.WriteLine($"{DateTime.Now}: {message}");
-            }
+            using var writer = new StreamWriter(_filePath, true);
+            writer.WriteLine($"{DateTime.Now}: {message}");
         }
     }
 }
