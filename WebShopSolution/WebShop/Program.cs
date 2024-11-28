@@ -20,15 +20,28 @@ builder.Services.AddTransient<INotificationObserver, EmailNotification>();
 
 builder.Services.AddSingleton<WebShop.Logging.ILogger>(provider => new FileLogger("log.txt"));
 
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Lägg till Swagger middleware
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+// Aktivera HTTPS-omdirigering endast i produktionsmiljö
+if (!app.Environment.IsDevelopment())
+{
+    // Endast aktivera HTTPS-omdirigering utanför utvecklingsmiljö
+    app.UseHttpsRedirection();
+}
+
+
 app.UseAuthorization();
+
+
 app.MapControllers();
+
+
 app.Run();
